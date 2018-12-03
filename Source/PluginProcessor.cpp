@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <sstream>
@@ -37,14 +27,13 @@ tree (*this, nullptr)
     
     tree.createAndAddParameter("env1_attack", "Env1_attack", "Env1_attack", envParam, 1000, nullptr, nullptr);
     tree.createAndAddParameter("env1_decay", "Env1_decay", "Env1_decay", envParam, 1000, nullptr, nullptr);
-    tree.createAndAddParameter("env1_sustain", "Env1_sustain", "Env1_sustain", sustainParam, 0, nullptr, nullptr);
+    tree.createAndAddParameter("env1_sustain", "Env1_sustain", "Env1_sustain", sustainParam, 0.2f, nullptr, nullptr);
     tree.createAndAddParameter("env1_release", "Env1_release", "Env1_release", envParam, 1000, nullptr, nullptr);
 
     tree.createAndAddParameter("env2_attack", "Env2_attack", "Env2_attack", envParam, 1000, nullptr, nullptr);
     tree.createAndAddParameter("env2_decay", "Env2_decay", "Env2_decay", envParam, 1000, nullptr, nullptr);
-    tree.createAndAddParameter("env2_sustain", "Env2_sustain", "Env2_sustain", sustainParam, 0, nullptr, nullptr);
+    tree.createAndAddParameter("env2_sustain", "Env2_sustain", "Env2_sustain", sustainParam, 0.2f, nullptr, nullptr);
     tree.createAndAddParameter("env2_release", "Env2_release", "Env2_release", envParam, 1000, nullptr, nullptr);
-
     
     tree.createAndAddParameter("osc1_waveform", "Osc1_waveform", "Osc1_waveform", osc1WaveformParam, 0, nullptr, nullptr);
     tree.createAndAddParameter("osc2_waveform", "Osc2_waveform", "Osc2_waveform", osc2WaveformParam, 0, nullptr, nullptr);
@@ -52,22 +41,11 @@ tree (*this, nullptr)
     tree.createAndAddParameter("osc1_mute", "Osc1_mute", "Osc1_mute", oscMuteParam, 0, nullptr, nullptr);
     tree.createAndAddParameter("osc2_mute", "Osc2_mute", "Osc2_mute", oscMuteParam, 1, nullptr, nullptr);
     
-    tree.createAndAddParameter("env1_active", "Env1_active", "Env1_active", oscMuteParam, 0, nullptr, nullptr);
-    tree.createAndAddParameter("env2_active", "Env2_active", "Env2_active", oscMuteParam, 0, nullptr, nullptr);
-
-    
     //Initialize Tree
     tree.state = ValueTree("SynthTree");
     
-    //clear voices from last key press before new key press
-    synth1.clearVoices();
-    synth2.clearVoices();
-    
-    
-    //give 5 voices
-    for(int i = 0; i < 5; i++)
+   for(int i = 0; i < 5; i++)
     {
-        // new SynthesiserVoice()??
         synth1.addVoice(new SynthVoice());
         synth2.addVoice(new SynthVoice());
     }
@@ -147,10 +125,6 @@ void SynthAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-    
-    //ignore unused Samples from last key that we pressed
     ignoreUnused(samplesPerBlock);
     lastSampleRate = sampleRate;
     synth1.setCurrentPlaybackSampleRate(lastSampleRate);
@@ -189,6 +163,7 @@ bool SynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) co
 
 void SynthAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+        
     for(int i = 0; i < synth1.getNumVoices(); i++)
     {
         if((voice1 = dynamic_cast<SynthVoice*>(synth1.getVoice(i))))
@@ -201,8 +176,6 @@ void SynthAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& 
             voice1->setWaveform(tree.getRawParameterValue("osc1_waveform"));
             
             voice1->setMute(tree.getRawParameterValue("osc1_mute"));
-            
-            voice1->setEnvActive(tree.getRawParameterValue("env1_active"));
         }
     }
 
@@ -210,22 +183,19 @@ void SynthAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& 
     {
         if((voice2 = dynamic_cast<SynthVoice*>(synth2.getVoice(i))))
         {
-            voice1->setAttack(tree.getRawParameterValue("env2_attack"));
-            voice1->setDecay(tree.getRawParameterValue("env2_decay"));
-            voice1->setSustain(tree.getRawParameterValue("env2_sustain"));
-            voice1->setRelease(tree.getRawParameterValue("env2_release"));
+            voice2->setAttack(tree.getRawParameterValue("env2_attack"));
+            voice2->setDecay(tree.getRawParameterValue("env2_decay"));
+            voice2->setSustain(tree.getRawParameterValue("env2_sustain"));
+            voice2->setRelease(tree.getRawParameterValue("env2_release"));
             
             voice2->setWaveform(tree.getRawParameterValue("osc2_waveform"));
             
             voice2->setMute(tree.getRawParameterValue("osc2_mute"));
-            
-            voice2->setEnvActive(tree.getRawParameterValue("env2_active"));
-
         }
     }
 
-    
     buffer.clear();
+        
     synth1.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     synth2.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }

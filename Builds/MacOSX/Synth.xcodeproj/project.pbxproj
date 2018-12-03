@@ -35,6 +35,8 @@
 		03F1310D3A21C702B989AC62 = {isa = PBXBuildFile; fileRef = 6E9FE5A7F74EFF2C83F70FE6; };
 		58BC90DF781D6BB2EA1C234C = {isa = PBXBuildFile; fileRef = 99A362A049D1774ADFEE9E89; };
 		AED455E6C144E4D622406F5D = {isa = PBXBuildFile; fileRef = 3071DF7A5BA606517DF68436; };
+		D5707DC90E3E464AACC69055 = {isa = PBXBuildFile; fileRef = 631F66920CB7F98D54C5F9B5; };
+		B88E8BCAC4D7C3A12ECA4C8D = {isa = PBXBuildFile; fileRef = F0AB8B080A2D28CDF6C2151D; };
 		9361E0AAE9BDB15FA1496CC0 = {isa = PBXBuildFile; fileRef = AF8675652C0602FEE5F305B9; };
 		A73B8C69E7971D435A5C4683 = {isa = PBXBuildFile; fileRef = 582C52BCE258A82685B76771; };
 		B1370DF345B8D235B4044800 = {isa = PBXBuildFile; fileRef = B77646AE65C818C14C261814; };
@@ -85,6 +87,7 @@
 		569D70AF344D7338CB58148A = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "include_juce_audio_plugin_client_Standalone.cpp"; path = "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp"; sourceTree = "SOURCE_ROOT"; };
 		582C52BCE258A82685B76771 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_devices.mm"; path = "../../JuceLibraryCode/include_juce_audio_devices.mm"; sourceTree = "SOURCE_ROOT"; };
 		627AA93241EB1B5323CD0903 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_audio_plugin_client"; path = "../../../../../../../../Applications/JUCE/modules/juce_audio_plugin_client"; sourceTree = "SOURCE_ROOT"; };
+		631F66920CB7F98D54C5F9B5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SynthSound.cpp; path = ../../Source/SynthSound.cpp; sourceTree = "SOURCE_ROOT"; };
 		6CAB645C025DB421984D1000 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_core.mm"; path = "../../JuceLibraryCode/include_juce_core.mm"; sourceTree = "SOURCE_ROOT"; };
 		6E19DF2CF2DA557C2FBF5A9E = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		6E9FE5A7F74EFF2C83F70FE6 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "stb_vorbis.c"; path = "../../../Libraries/Maximilian/stb_vorbis.c"; sourceTree = "SOURCE_ROOT"; };
@@ -131,6 +134,7 @@
 		E6B95995A07AA7B379C00DD1 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_events"; path = "../../../../../../../../Applications/JUCE/modules/juce_events"; sourceTree = "SOURCE_ROOT"; };
 		E6F56EAAC7898846C4ADB351 = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = "SOURCE_ROOT"; };
 		EE33FAFA5CAC0D40DC8DDBCF = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_gui_extra.mm"; path = "../../JuceLibraryCode/include_juce_gui_extra.mm"; sourceTree = "SOURCE_ROOT"; };
+		F0AB8B080A2D28CDF6C2151D = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SynthVoice.cpp; path = ../../Source/SynthVoice.cpp; sourceTree = "SOURCE_ROOT"; };
 		F193F453C722D9154F1DB8B0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_utils.mm"; path = "../../JuceLibraryCode/include_juce_audio_utils.mm"; sourceTree = "SOURCE_ROOT"; };
 		F52882EC399C715817C709DB = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		FF15794A0421BF2EB25385F0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../Libraries/Maximilian/main.cpp; sourceTree = "SOURCE_ROOT"; };
@@ -162,7 +166,9 @@
 					207B7C29AD39EEC25B1A52F6,
 					3071DF7A5BA606517DF68436,
 					17D2F1D8A5FFD4C58E7E610F,
+					631F66920CB7F98D54C5F9B5,
 					35909031C3EA4DEA05F261D1,
+					F0AB8B080A2D28CDF6C2151D,
 					C75FBA7F0AECEA7BAFB726DD, ); name = Source; sourceTree = "<group>"; };
 		C0ECA09280CB15E96F288DC1 = {isa = PBXGroup; children = (
 					F45A777719BF307410B8CC6D, ); name = Synth; sourceTree = "<group>"; };
@@ -240,7 +246,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11; }; name = Release; };
 		34A5203452128F4F7F70679B = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -278,7 +283,6 @@
 				WRAPPER_EXTENSION = vst; }; name = Debug; };
 		13791260E295E89DD9A57314 = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -318,7 +322,6 @@
 				WRAPPER_EXTENSION = vst; }; name = Release; };
 		06374A546627F901683AA4DC = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -350,7 +353,6 @@
 				USE_HEADERMAP = NO; }; name = Debug; };
 		60DF719CBCE77FEAD323B0A2 = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -384,7 +386,6 @@
 				USE_HEADERMAP = NO; }; name = Release; };
 		EC2E4B7D2DF93C84A71B05F7 = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -415,7 +416,6 @@
 				USE_HEADERMAP = NO; }; name = Debug; };
 		1FE7499AFCCF2E2C5F6A31BA = {isa = XCBuildConfiguration; buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
@@ -602,6 +602,8 @@
 					03F1310D3A21C702B989AC62,
 					58BC90DF781D6BB2EA1C234C,
 					AED455E6C144E4D622406F5D,
+					D5707DC90E3E464AACC69055,
+					B88E8BCAC4D7C3A12ECA4C8D,
 					9361E0AAE9BDB15FA1496CC0,
 					A73B8C69E7971D435A5C4683,
 					B1370DF345B8D235B4044800,
@@ -620,7 +622,7 @@
 					C3B59F90F1FECA8DD1B20007, ); runOnlyForDeploymentPostprocessing = 0; };
 		97B392123C526DD6DEE4B346 = {isa = PBXNativeTarget; buildConfigurationList = 96AD09018266A1D26156D2CB; buildPhases = (
 					8F49BA66AA35ECC7F9A01920, ); buildRules = ( ); dependencies = (  ); name = "Synth - Shared Code"; productName = Synth; productReference = 99F5611F189AFB6BBE6FBFB9; productType = "com.apple.product-type.library.static"; };
-		8AB24D443D42F5281FE2AC77 = {isa = PBXProject; buildConfigurationList = A63497931D4A421CF047C31E; attributes = { LastUpgradeCheck = 0930; ORGANIZATIONNAME = ""; TargetAttributes = { 84DAA29AACFE02CC4F6F4889 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };39505233A8B329FF5A3225A3 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };BA1BCD2E372A73A8EA363550 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };97B392123C526DD6DEE4B346 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; }; }; }; compatibilityVersion = "Xcode 3.2"; hasScannedForEncodings = 0; mainGroup = 2372D8805AC08EBC2C8D115D; projectDirPath = ""; projectRoot = ""; targets = (84DAA29AACFE02CC4F6F4889, 39505233A8B329FF5A3225A3, BA1BCD2E372A73A8EA363550, 97B392123C526DD6DEE4B346); };
+		8AB24D443D42F5281FE2AC77 = {isa = PBXProject; buildConfigurationList = A63497931D4A421CF047C31E; attributes = { LastUpgradeCheck = 0830; ORGANIZATIONNAME = ""; TargetAttributes = { 84DAA29AACFE02CC4F6F4889 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };39505233A8B329FF5A3225A3 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };BA1BCD2E372A73A8EA363550 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; };97B392123C526DD6DEE4B346 = { SystemCapabilities = {com.apple.ApplicationGroups.iOS = { enabled = 0; }; com.apple.InAppPurchase = { enabled = 0; }; com.apple.InterAppAudio = { enabled = 0; }; com.apple.Push = { enabled = 0; }; com.apple.Sandbox = { enabled = 0; }; }; }; }; }; compatibilityVersion = "Xcode 3.2"; hasScannedForEncodings = 0; mainGroup = 2372D8805AC08EBC2C8D115D; projectDirPath = ""; projectRoot = ""; targets = (84DAA29AACFE02CC4F6F4889, 39505233A8B329FF5A3225A3, BA1BCD2E372A73A8EA363550, 97B392123C526DD6DEE4B346); };
 	};
 	rootObject = 8AB24D443D42F5281FE2AC77;
 }

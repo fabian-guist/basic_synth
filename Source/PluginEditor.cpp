@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -28,9 +18,6 @@ SynthAudioProcessorEditor::SynthAudioProcessorEditor (SynthAudioProcessor& p)
     env2Group = new GroupComponent("Env2", "Env2");
     addAndMakeVisible(env2Group);
     
-    
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
     setSize (300, 300);
     
     osc1AttackSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
@@ -57,7 +44,7 @@ SynthAudioProcessorEditor::SynthAudioProcessorEditor (SynthAudioProcessor& p)
     
     osc1DecayTree = new AudioProcessorValueTreeState::SliderAttachment(processor.tree, "env1_decay", osc1DecaySlider);
 
-    
+
     osc1SustainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
     osc1SustainSlider.setRange(0.1f, 1000.f);
     osc1SustainSlider.setValue(0.1f);
@@ -173,18 +160,6 @@ SynthAudioProcessorEditor::SynthAudioProcessorEditor (SynthAudioProcessor& p)
     osc2MuteButtonTree = new AudioProcessorValueTreeState::ButtonAttachment(processor.tree, "osc2_mute", osc2MuteButton);
     
     addAndMakeVisible(osc2MuteButton);
-    
-    env1ActiveButton.setButtonText ("Active");
-    env1ActiveButton.setToggleState (false, dontSendNotification);
-    env1ActiveButtonTree = new AudioProcessorValueTreeState::ButtonAttachment(processor.tree, "env1_active", osc2MuteButton);
-    
-    addAndMakeVisible(env1ActiveButton);
-    
-    env2ActiveButton.setButtonText ("Active");
-    env2ActiveButton.setToggleState (false, dontSendNotification);
-    env2ActiveButtonTree = new AudioProcessorValueTreeState::ButtonAttachment(processor.tree, "env1_active", osc2MuteButton);
-    
-    addAndMakeVisible(env2ActiveButton);
 }
 
 void Slider::Listener::sliderValueChanged(Slider* slider)
@@ -200,12 +175,7 @@ SynthAudioProcessorEditor::~SynthAudioProcessorEditor()
 //==============================================================================
 void SynthAudioProcessorEditor::paint (Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
-    /*g.setColour (Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), Justification::centred, 1);*/
 }
 
 void SynthAudioProcessorEditor::resized()

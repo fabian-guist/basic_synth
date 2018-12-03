@@ -1,21 +1,8 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 
-//==============================================================================
-/**
-*/
 class SynthAudioProcessorEditor  : public AudioProcessorEditor,
 public Slider::Listener
 {
@@ -90,9 +77,6 @@ private:
     
     ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> osc1MuteButtonTree;
     ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> osc2MuteButtonTree;
-    
-    ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> env1ActiveButtonTree;
-    ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> env2ActiveButtonTree;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessorEditor)
 };

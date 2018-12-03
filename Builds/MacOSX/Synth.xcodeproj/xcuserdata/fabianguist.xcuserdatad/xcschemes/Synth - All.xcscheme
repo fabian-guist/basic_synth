@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1DE2FB198B4085F739F271E6"
+               BlueprintIdentifier = "84DAA29AACFE02CC4F6F4889"
                BuildableName = "Synth - All"
                BlueprintName = "Synth - All"
                ReferencedContainer = "container:Synth.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -52,7 +50,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1DE2FB198B4085F739F271E6"
+            BlueprintIdentifier = "84DAA29AACFE02CC4F6F4889"
             BuildableName = "Synth - All"
             BlueprintName = "Synth - All"
             ReferencedContainer = "container:Synth.xcodeproj">
@@ -70,7 +68,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1DE2FB198B4085F739F271E6"
+            BlueprintIdentifier = "84DAA29AACFE02CC4F6F4889"
             BuildableName = "Synth - All"
             BlueprintName = "Synth - All"
             ReferencedContainer = "container:Synth.xcodeproj">
